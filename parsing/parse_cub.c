@@ -3,7 +3,9 @@
 bool validate_cub(t_game *t)
 {
     char* line;
+    size_t i;
 
+    i = 0;
     line = NULL;
     t->map.fd = open(t->map.name, O_RDONLY);
     if (t->map.fd < 0)
@@ -11,16 +13,16 @@ bool validate_cub(t_game *t)
         ft_fperror("Bad file descriptor!", STDERR_FILENO, true);
         return (false);
     }
-
-    while (1)
+    if (!init_map(t))
+        return (false);
+    while (i < t->map.line_count)
     {
-        // ALLOCATE MAP DB NOW DUMBASS
         line = get_next_line(t->map.fd);
-        if (!line)
-            break;
-        t->map.db[t->map.x++] = ft_strdup(line);
+        t->map.db[i++] = ft_strdup(line);
         free(line);
     }
+    t->map.db[i] = NULL;
+    clear_gnl(t->map.fd);
     close(t->map.fd);
     return (true);
 }
