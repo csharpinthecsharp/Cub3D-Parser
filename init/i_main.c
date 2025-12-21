@@ -2,14 +2,34 @@
 
 bool init_map(t_game *t)
 {
-    t->map.line_count = count_line(t->map.name);
+    t->map.line_count = size_for_line_count(t->map.name);
     t->map.db = malloc(sizeof(char *) * (t->map.line_count + 1));
     if (!t->map.db)
     {
-        ft_fperror("Malloc failed (t->map.db)!", STDERR_FILENO, true);
         close(t->map.fd);
         return (false);
     }
+    return (true);
+}
+
+bool init_path(t_game *t)
+{
+    size_t size_NO = size_for_path("NO", t);
+    size_t size_EA = size_for_path("EA", t);
+    size_t size_SO = size_for_path("SO", t);
+    size_t size_WE = size_for_path("WE", t);
+    t->path.NO = malloc(sizeof(char) * (size_NO + 1));
+    if (!t->path.NO)
+        return (false);
+    t->path.EA = malloc(sizeof(char) * (size_EA + 1));
+    if (!t->path.EA)
+        return (false);
+    t->path.SO = malloc(sizeof(char) * (size_SO + 1));
+    if (!t->path.SO)
+        return (false);
+    t->path.WE = malloc(sizeof(char) * (size_WE + 1));
+    if (!t->path.SO)
+        return (false);
     return (true);
 }
 
@@ -17,10 +37,17 @@ void init_main(t_game *t, const char *map_name)
 {
     t->map.name = ft_strdup(map_name);
     t->map.name_len = ft_strlen(map_name);
-    t->map.x = 0;
-    t->map.y = 0;
     t->map.db = NULL;
     t->map.fd = -1;
     t->map.line_count = 0;
+    t->manip.a = 0;
+    t->manip.b = 0;
+    t->manip.c = 0;
+    t->manip.eof = false;
+    t->manip.count = 0;
+    t->path.NO = NULL;
+    t->path.EA = NULL;
+    t->path.SO = NULL;
+    t->path.WE = NULL;
     return ;
 }

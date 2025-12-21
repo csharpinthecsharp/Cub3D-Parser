@@ -8,12 +8,14 @@ MLX_LIB		=	$(addprefix $(MLX_PATH), $(MLX_FILE))
 MLX_FLAGS	=	-L$(MLX_PATH) -lmlx -L/usr/lib -lXext -lX11 -lm -lz
 
 SRCS	= main.c \
-		  parsing/p_main.c \
-		  parsing/parse_name.c \
-		  parsing/parse_cub.c \
-		  parsing/parse_utils.c \
+		  parsing/p_entry.c \
+		  parsing/p_name_check.c \
+		  parsing/p_open_cub.c \
+		  parsing/p_utils.c \
+		  parsing/p_format.c \
+		  parsing/p_alloc_sizes.c \
 		  init/i_main.c \
-		  free/f_main.c
+		  free/f_main.c \
 
 OBJS	= $(SRCS:.c=.o)
 LIBFT 	= libft/libft.a

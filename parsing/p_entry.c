@@ -7,5 +7,7 @@ bool parsing_main(t_game *t, const char *name)
         return (false);
     if (!validate_cub(t))
         return (false);
+    if (!validate_format(t))
+        return (false);
     return (true);
 }
