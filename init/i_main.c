@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:23:13 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/22 14:23:14 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/22 17:26:02 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,29 @@ bool init_path(t_game *t)
 
 bool init_color(t_game *t, char type)
 {
-    (void)t;
-    (void)type;
-    return true;   
+    size_t len;
+
+    if (type == 'F')
+        len = size_for_color_token('F', t);
+    else
+        len = size_for_color_token('C', t);
+    t->color.token = malloc(sizeof(char) * (len + 1));
+    if (!t->color.token)
+        return (false);
+    if (type == 'F')
+    {
+        t->color.token = retrieve_color('F', t->color.token, t);
+        t->color.F = ft_calloc(MAX_LEN_RGB + 1, sizeof(int));
+        t->color.F[MAX_LEN_RGB] = -1;  
+    }
+    else
+    {
+        t->color.token = retrieve_color('C', t->color.token, t);
+        t->color.C = ft_calloc(MAX_LEN_RGB + 1, sizeof(int));
+        t->color.C[MAX_LEN_RGB] = -1;
+    }
+    if (type == 'C')
+        free(t->color.token);
 }
 
 void init_main(t_game *t, const char *map_name)

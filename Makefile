@@ -13,6 +13,8 @@ SRCS	= main.c \
 		  parsing/p_open_cub.c \
 		  parsing/p_utils.c \
 		  parsing/p_format.c \
+		  parsing/p_color_format.c \
+		  parsing/p_path_format.c \
 		  parsing/p_alloc_sizes.c \
 		  init/i_main.c \
 		  free/f_main.c \
