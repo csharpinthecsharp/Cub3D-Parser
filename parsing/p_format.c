@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   p_format.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/22 14:22:32 by ltrillar          #+#    #+#             */
+/*   Updated: 2025/12/22 14:39:17 by ltrillar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header.h"
 
 static char *retrieve_path(char *request, char *token, t_game *t)
@@ -76,30 +88,25 @@ static char *retrieve_color(char request, char *token, t_game *t)
         return (free(token), NULL);
     return (token);
 }
-
-bool color_tokenizer(char *token, char type, t_game *t)
+/*Validate exactly 3 components
+Validate each component is 0–255
+Reject malformed input
+Avoid side effects until parsing succeeds
+Return false on error*/
+int *color_tokenizer(char *token, int *holder, t_game *t)
 {
     manip_reset(t);
-    while (token[t->manip.a] && (t->manip.b < MAX_LEN_RGB))
+    while (token[t->manip.a] && holder[t->manip.b] > -1)
     {
         while (token[t->manip.a] == ' ')
             t->manip.a++;
         if (token[t->manip.a] == ',')
             t->manip.b++;
         if (ft_isdigit(token[t->manip.a]))
-        {
-            if (type == 'F')
-                t->color.F[t->manip.b] = t->color.F[t->manip.b] * 10 + token[t->manip.a] - '0';
-            else
-                t->color.C[t->manip.b] = t->color.C[t->manip.b] * 10 + token[t->manip.a] - '0';
-        }
+            holder[t->manip.b] = holder[t->manip.b] * 10 + token[t->manip.a] - '0';
         t->manip.a++;
-    }
-    if (type == 'F')
-        t->color.F[t->manip.b + 1] = -1;
-    else
-        t->color.C[t->manip.b + 1] = -1;
-    return (true);
+    }    
+    return (holder);
 }
 /* /!\ */  
 /* /!\ */
@@ -122,24 +129,20 @@ static bool validate_color_format(t_game *t)
     if (!t->color.token)
         return (false);
     t->color.token = retrieve_color('F', t->color.token, t);
-    t->color.F = malloc(sizeof(int) * (MAX_LEN_RGB + 1));
-    if (!t->color.F)
-        return (false);
-    if (!color_tokenizer(t->color.token, 'F', t))
-        return (false);
+    t->color.F = ft_calloc(MAX_LEN_RGB + 1, sizeof(int));
+    t->color.F[MAX_LEN_RGB] = -1;
+    t->color.F = color_tokenizer(t->color.token, t->color.F, t);
 
-    ft_memset(t->color.token, 0, ft_strlen(t->color.token));
+    free(t->color.token);
 
     len = size_for_color_token('C', t);
     t->color.token = malloc(sizeof(char) * (len + 1));
     if (!t->color.token)
         return (false);
-    t->color.C = malloc(sizeof(int) * (MAX_LEN_RGB + 1));
-    if (!t->color.C)
-        return (false);
     t->color.token = retrieve_color('C', t->color.token, t);
-    if (!color_tokenizer(t->color.token, 'C', t))
-        return (false);
+    t->color.C = ft_calloc(MAX_LEN_RGB + 1, sizeof(int));
+    t->color.C[MAX_LEN_RGB] = -1;
+    t->color.C = color_tokenizer(t->color.token, t->color.C, t);
     return (true);
 }
 
@@ -154,13 +157,13 @@ void debug(t_game *t, bool verbose)
         printf("SOUTH: %s\n", t->path.SO);
         printf("EAST: %s\n", t->path.EA);
         printf("WEST: %s\n", t->path.WE);
-        while (t->color.C[i] != -1)
+        while (t->color.C[i] > -1)
         {
-            printf("F_COLOR: %d\n", t->color.F[i]);
+        printf("F_COLOR: %d\n", t->color.F[i]);
             i++;
         }
         i = 0;
-        while (t->color.F[i] != -1)
+        while (t->color.F[i] > -1)
         {
             printf("C_COLOR: %d\n", t->color.C[i]);
             i++;
