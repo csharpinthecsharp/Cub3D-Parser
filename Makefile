@@ -9,8 +9,8 @@ MLX_FLAGS	=	-L$(MLX_PATH) -lmlx -L/usr/lib -lXext -lX11 -lm -lz
 
 SRCS	= main.c \
 		  parsing/p_entry.c \
-		  parsing/p_name_check.c \
-		  parsing/p_open_cub.c \
+		  parsing/p_name.c \
+		  parsing/p_cub.c \
 		  parsing/p_utils.c \
 		  parsing/p_format.c \
 		  parsing/p_color_format.c \

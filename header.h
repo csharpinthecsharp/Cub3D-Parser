@@ -65,6 +65,7 @@ bool validate_cub(t_game *t);
 bool validate_format(t_game *t);
 bool validate_path_format(t_game *t);
 bool validate_color_format(t_game *t);
+char *retrieve_color(char request, char *token, t_game *t);
 void clear_gnl(int fd); 
 void manip_reset(t_game *t);
 size_t size_for_line_count(const char *name);

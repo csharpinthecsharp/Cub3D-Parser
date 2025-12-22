@@ -32,17 +32,21 @@ bool validate_path_format(t_game *t)
 {
     if (!init_path(t))
         return (false);
+        
     t->path.NO = retrieve_path("NO", t->path.NO, t);
-    if (!t->path.NO)
+    if (!t->path.NO || access(t->path.NO, R_OK) != 0)
         return (false);
+
     t->path.SO = retrieve_path("SO", t->path.SO, t);
-    if (!t->path.SO)
+    if (!t->path.SO || access(t->path.SO, R_OK) != 0)
         return (false);
+
     t->path.WE = retrieve_path("WE", t->path.WE, t);
-    if (!t->path.WE)
+    if (!t->path.WE || access(t->path.WE, R_OK) != 0)
         return (false);
+
     t->path.EA = retrieve_path("EA", t->path.EA, t);
-    if (!t->path.EA)
+    if (!t->path.EA || access(t->path.EA, R_OK) != 0)
         return (false);
     return (true);
 }

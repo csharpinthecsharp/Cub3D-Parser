@@ -29,3 +29,4 @@ void manip_reset(t_game *t)
     t->manip.eof = false;
     t->manip.count = 0;
 }
+

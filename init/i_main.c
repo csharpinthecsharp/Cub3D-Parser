@@ -48,7 +48,9 @@ bool init_path(t_game *t)
 bool init_color(t_game *t, char type)
 {
     size_t len;
-
+    
+    if (type == 'C')
+        free(t->color.token);
     if (type == 'F')
         len = size_for_color_token('F', t);
     else
@@ -68,8 +70,7 @@ bool init_color(t_game *t, char type)
         t->color.C = ft_calloc(MAX_LEN_RGB + 1, sizeof(int));
         t->color.C[MAX_LEN_RGB] = -1;
     }
-    if (type == 'C')
-        free(t->color.token);
+    return (true);
 }
 
 void init_main(t_game *t, const char *map_name)

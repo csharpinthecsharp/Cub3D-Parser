@@ -16,11 +16,8 @@ static bool open_map(t_game *t)
 {
     t->map.fd = open(t->map.name, O_RDONLY);
     if (t->map.fd < 0)
-    {
-        close(t->map.fd);
         return (false);
-    }
-    return true;
+    return (true);
 }
 
 static bool send_map_struct(t_game *t)
@@ -48,7 +45,7 @@ bool validate_cub(t_game *t)
 {
     if (!open_map(t))
     {
-        ft_fperror("Bad file descriptor!", STDERR_FILENO, true);
+        ft_fperror("Map path not found!", STDERR_FILENO, true);
         return (false);
     }
     if (!init_map(t))

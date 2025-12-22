@@ -1,6 +1,6 @@
 #include "../header.h"
 
-static char *retrieve_color(char request, char *token, t_game *t)
+char *retrieve_color(char request, char *token, t_game *t)
 {
     manip_reset(t);
     while (t->manip.a < t->map.line_count)
