@@ -33,7 +33,6 @@ typedef struct s_map {
     int fd;
     size_t line_count;
     size_t name_len;
-
     t_line line;
 } t_map;
 

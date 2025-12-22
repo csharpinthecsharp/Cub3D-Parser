@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:22:32 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/22 14:39:17 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/22 16:17:47 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ static char *retrieve_path(char *request, char *token, t_game *t)
 static bool validate_path_format(t_game *t)
 {
     if (!init_path(t))
-    {
-        ft_fperror("Malloc failed (t->path)!", STDERR_FILENO, true);
         return (false);
-    }
     t->path.NO = retrieve_path("NO", t->path.NO, t);
     if (!t->path.NO)
         return (false);
@@ -88,41 +85,39 @@ static char *retrieve_color(char request, char *token, t_game *t)
         return (free(token), NULL);
     return (token);
 }
-/*Validate exactly 3 components
-Validate each component is 0–255
-Reject malformed input
-Avoid side effects until parsing succeeds
-Return false on error*/
-int *color_tokenizer(char *token, int *holder, t_game *t)
+
+static int *color_tokenizer(char *token, int *holder, t_game *t)
 {
     manip_reset(t);
     while (token[t->manip.a] && holder[t->manip.b] > -1)
     {
+        if (!(ft_isdigit(token[t->manip.a]) || (token[t->manip.a] == ' ') 
+            || (token[t->manip.a] == ',') || (token[t->manip.a] == '\n')))
+            return (free(holder), NULL);
         while (token[t->manip.a] == ' ')
             t->manip.a++;
         if (token[t->manip.a] == ',')
+        {
+            t->manip.count++;
             t->manip.b++;
+        }
+        if (t->manip.count > 2)
+            return (free(holder), NULL);
         if (ft_isdigit(token[t->manip.a]))
+        {
             holder[t->manip.b] = holder[t->manip.b] * 10 + token[t->manip.a] - '0';
+            if (holder[t->manip.b] > 255)
+                return (free(holder), NULL);
+        }
         t->manip.a++;
-    }    
+    }
     return (holder);
 }
-/* /!\ */  
-/* /!\ */
-/* /!\ */
-// --------> color must be beetween 0-255 ! <--------
-/* /!\ */
-/* /!\ */
-/* /!\ */
+
 static bool validate_color_format(t_game *t)
 {
-    /*if (!init_color(t))
-    {
-        ft_fperror("Malloc failed (t->color)!", STDERR_FILENO, true);
-        return (false);
-    }*/
-    int len;
+    // NEED TO INIT FUNCTION FOR THIS, more cleaner
+    size_t len;
 
     len = size_for_color_token('F', t);
     t->color.token = malloc(sizeof(char) * (len + 1));
@@ -132,6 +127,8 @@ static bool validate_color_format(t_game *t)
     t->color.F = ft_calloc(MAX_LEN_RGB + 1, sizeof(int));
     t->color.F[MAX_LEN_RGB] = -1;
     t->color.F = color_tokenizer(t->color.token, t->color.F, t);
+    if (!t->color.F)
+        return (false);
 
     free(t->color.token);
 
@@ -143,6 +140,8 @@ static bool validate_color_format(t_game *t)
     t->color.C = ft_calloc(MAX_LEN_RGB + 1, sizeof(int));
     t->color.C[MAX_LEN_RGB] = -1;
     t->color.C = color_tokenizer(t->color.token, t->color.C, t);
+    if (!t->color.C)
+        return (false);
     return (true);
 }
 
@@ -194,5 +193,6 @@ bool validate_format(t_game *t)
         return (false);
     }
     debug(t, true);
+    // NEED TO HANDLE DUPLICATED NOW
     return (true);
 }
