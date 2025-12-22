@@ -154,13 +154,13 @@ void debug(t_game *t, bool verbose)
         printf("SOUTH: %s\n", t->path.SO);
         printf("EAST: %s\n", t->path.EA);
         printf("WEST: %s\n", t->path.WE);
-        while (t->color.C[i])
+        while (t->color.C[i] != -1)
         {
             printf("F_COLOR: %d\n", t->color.F[i]);
             i++;
         }
         i = 0;
-        while (t->color.F[i])
+        while (t->color.F[i] != -1)
         {
             printf("C_COLOR: %d\n", t->color.C[i]);
             i++;

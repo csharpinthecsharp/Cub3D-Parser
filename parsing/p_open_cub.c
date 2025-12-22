@@ -48,6 +48,7 @@ bool validate_cub(t_game *t)
     {
         ft_fperror("Map is empty!", STDERR_FILENO, true);
         close(t->map.fd);
+        return (false);
     }
     return (true);
 }
