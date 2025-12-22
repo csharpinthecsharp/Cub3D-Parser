@@ -25,6 +25,30 @@ size_t size_for_path(char *request, t_game *t)
     return (t->manip.count);
 }
 
+size_t size_for_color_token(char request, t_game *t)
+{
+    manip_reset(t);
+    while (t->manip.a < t->map.line_count)
+    {
+        if (t->manip.eof)
+            break;
+        t->manip.b = 0;
+        while (t->map.db[t->manip.a][t->manip.b])
+        {
+            if (t->manip.eof && (t->map.db[t->manip.a][t->manip.b] != ' '))
+                t->manip.count++;
+            if (t->map.db[t->manip.a][t->manip.b] == request)
+            {
+                t->manip.eof = true;
+                t->manip.b++;
+            }
+            t->manip.b++;
+        }
+        t->manip.a++;
+    }
+    return (t->manip.count);
+}
+
 size_t size_for_line_count(const char *name)
 {
     size_t count;

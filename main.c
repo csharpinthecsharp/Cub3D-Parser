@@ -2,6 +2,7 @@
 
 int main( int ac, char **av )
 {
+    // https://harm-smits.github.io/42docs/projects/cub3d <--- FOR RAYCASTING
     (void)av;
     t_game game;
     t_game *t;

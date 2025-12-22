@@ -33,6 +33,13 @@ bool init_path(t_game *t)
     return (true);
 }
 
+bool init_color(t_game *t, char type)
+{
+    (void)t;
+    (void)type;
+    return true;   
+}
+
 void init_main(t_game *t, const char *map_name)
 {
     t->map.name = ft_strdup(map_name);
@@ -49,5 +56,8 @@ void init_main(t_game *t, const char *map_name)
     t->path.EA = NULL;
     t->path.SO = NULL;
     t->path.WE = NULL;
+    t->color.token = NULL;
+    t->color.C = NULL;
+    t->color.F = NULL;
     return ;
 }
