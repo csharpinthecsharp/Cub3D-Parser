@@ -10,6 +10,16 @@
 
 #define MAX_LEN_RGB 3
 
+typedef struct s_loc {
+    size_t current;
+    size_t NO;
+    size_t SO;
+    size_t WE;
+    size_t EA;
+    size_t F;
+    size_t C;
+} t_loc;
+
 typedef struct s_path {
     char *NO;
     char *SO;
@@ -23,23 +33,19 @@ typedef struct s_color {
     int *C;
 } t_color;
 
-typedef struct s_line {
-    size_t size;
-} t_line;
-
 typedef struct s_map {
     char *name;
     char **db;
     int fd;
     size_t line_count;
     size_t name_len;
-    t_line line;
 } t_map;
 
 typedef struct s_manip {
     size_t a;
     size_t b;
     size_t c;
+    size_t d;
     bool eof;
     size_t count;
 } t_manip;
@@ -49,6 +55,7 @@ typedef struct s_game {
     t_color color;
     t_path path;
     t_manip manip;
+    t_loc loc;
 } t_game;
 
 /* FREE*/
@@ -65,9 +72,12 @@ bool validate_cub(t_game *t);
 bool validate_format(t_game *t);
 bool validate_path_format(t_game *t);
 bool validate_color_format(t_game *t);
+bool validate_global_format(t_game *t);
+bool validate_map_format(t_game *t);
 char *retrieve_color(char request, char *token, t_game *t);
 void clear_gnl(int fd); 
 void manip_reset(t_game *t);
+bool do_exist(const char *path);
 size_t size_for_line_count(const char *name);
 size_t size_for_path(char *request, t_game *t); 
 size_t size_for_color_token(char request, t_game *t); /* END PARSING */

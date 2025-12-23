@@ -27,6 +27,8 @@ static bool send_map_struct(t_game *t)
 
     i = 0;
     line = NULL;
+    if (!init_map(t))
+        return (false);
     if (t->map.line_count == 0)
         return (false);
     while (i < t->map.line_count)
@@ -48,14 +50,9 @@ bool validate_cub(t_game *t)
         ft_fperror("Map path not found!", STDERR_FILENO, true);
         return (false);
     }
-    if (!init_map(t))
-    {
-        ft_fperror("Malloc failed (t->map.db)!", STDERR_FILENO, true);
-        return (false);
-    }
     if (!send_map_struct(t))
     {
-        ft_fperror("Map is empty!", STDERR_FILENO, true);
+        ft_fperror("Failed to load the map struct!", STDERR_FILENO, true);
         close(t->map.fd);
         return (false);
     }

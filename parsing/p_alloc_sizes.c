@@ -27,6 +27,7 @@ size_t size_for_path(char *request, t_game *t)
             if ((t->map.db[t->manip.a][t->manip.b] == request[0]) &&
                     (t->map.db[t->manip.a][t->manip.b + 1] == request[1]))
             {
+                t->loc.current = t->manip.a;
                 t->manip.eof = true;
                 t->manip.b++;
             }
@@ -51,6 +52,7 @@ size_t size_for_color_token(char request, t_game *t)
                 t->manip.count++;
             if (t->map.db[t->manip.a][t->manip.b] == request)
             {
+                t->loc.current = t->manip.a;
                 t->manip.eof = true;
                 t->manip.b++;
             }

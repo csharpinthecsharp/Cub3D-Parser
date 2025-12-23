@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <stdbool.h>
 
+int ft_isspace(int c);
 char	*ft_strndup(const char *s, size_t n);
 char	*get_next_line(int fd);
 void    ft_fperror(char* msg, int file, bool flush);

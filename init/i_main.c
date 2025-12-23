@@ -27,9 +27,13 @@ bool init_map(t_game *t)
 bool init_path(t_game *t)
 {
     size_t size_NO = size_for_path("NO", t);
+    t->loc.NO = t->loc.current;
     size_t size_EA = size_for_path("EA", t);
+    t->loc.EA = t->loc.current;
     size_t size_SO = size_for_path("SO", t);
+    t->loc.SO = t->loc.current;
     size_t size_WE = size_for_path("WE", t);
+    t->loc.WE = t->loc.current;
     t->path.NO = malloc(sizeof(char) * (size_NO + 1));
     if (!t->path.NO)
         return (false);
@@ -48,28 +52,28 @@ bool init_path(t_game *t)
 bool init_color(t_game *t, char type)
 {
     size_t len;
+    int **clr_ptr;
+    size_t *loc_ptr;
     
-    if (type == 'C')
-        free(t->color.token);
     if (type == 'F')
-        len = size_for_color_token('F', t);
+    {
+        clr_ptr = &t->color.F;
+        loc_ptr = &t->loc.F;
+    }
     else
-        len = size_for_color_token('C', t);
+    {
+        free(t->color.token);
+        clr_ptr = &t->color.C;
+        loc_ptr = &t->loc.C;
+    }
+    len = size_for_color_token(type, t);
+    *loc_ptr = t->loc.current;
     t->color.token = malloc(sizeof(char) * (len + 1));
     if (!t->color.token)
         return (false);
-    if (type == 'F')
-    {
-        t->color.token = retrieve_color('F', t->color.token, t);
-        t->color.F = ft_calloc(MAX_LEN_RGB + 1, sizeof(int));
-        t->color.F[MAX_LEN_RGB] = -1;  
-    }
-    else
-    {
-        t->color.token = retrieve_color('C', t->color.token, t);
-        t->color.C = ft_calloc(MAX_LEN_RGB + 1, sizeof(int));
-        t->color.C[MAX_LEN_RGB] = -1;
-    }
+    t->color.token = retrieve_color(type, t->color.token, t);
+    *clr_ptr = ft_calloc(MAX_LEN_RGB + 1, sizeof(int));
+    (*clr_ptr)[MAX_LEN_RGB] = -1;
     return (true);
 }
 
@@ -83,6 +87,7 @@ void init_main(t_game *t, const char *map_name)
     t->manip.a = 0;
     t->manip.b = 0;
     t->manip.c = 0;
+    t->manip.d = 0;
     t->manip.eof = false;
     t->manip.count = 0;
     t->path.NO = NULL;
@@ -92,5 +97,11 @@ void init_main(t_game *t, const char *map_name)
     t->color.token = NULL;
     t->color.C = NULL;
     t->color.F = NULL;
-    return ;
+    t->loc.F = 0;
+    t->loc.C = 0;
+    t->loc.WE = 0;
+    t->loc.SO = 0;
+    t->loc.EA = 0;
+    t->loc.NO = 0;
+    t->loc.current = 0;
 }
