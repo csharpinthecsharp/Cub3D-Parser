@@ -63,10 +63,33 @@ size_t size_for_color_token(char request, t_game *t)
     return (t->manip.count);
 }
 
-size_t size_for_new_db(t_game *t)
+size_t size_for_new_db(t_game *t, t_manip *m)
 {
-    (void)t;
-    return (1);
+    manip_reset(t);
+    while (m->a++ < t->map.line_count)
+    {
+        if (t->map.db[m->a] != NULL)
+        {
+            m->d = ft_strlen(t->map.db[m->a]);
+            if (t->map.db[m->a] && m->d > 2)
+            {   
+                if (!ft_iselement(t->map.db[m->a]))
+                    return (0);
+                m->d--;
+                m->c = 0;
+                while (t->map.db[m->a][m->c++])
+                {
+                    if (t->map.db[m->a][m->c] != '\n')
+                    {
+                        while (ft_isspace(t->map.db[m->a][m->c]))
+                            m->c++;
+                    }
+                }
+                m->count++;
+            }
+        }
+    }
+    return (m->count);
 }
 
 size_t size_for_line_count(const char *name)

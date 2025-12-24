@@ -26,10 +26,13 @@ static void free_map(t_game *t)
     }
 
     i = 0;
-    if (t->map.valid_map)
+    if (t->map.valid_map != NULL)
     {
         while (t->map.valid_map[i])
-            free(t->map.valid_map[i++]);
+        {
+            free(t->map.valid_map[i]);
+            i++;
+        }
         free(t->map.valid_map);
     }
     return ;

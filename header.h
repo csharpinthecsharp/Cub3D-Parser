@@ -6,7 +6,6 @@
 #include "libft/libft.h"
 #include <stdbool.h>
 #include <fcntl.h>
-#include "mlx/mlx.h"
 
 #define MAX_LEN_RGB 3
 #define ELEMENTS 6
@@ -79,8 +78,9 @@ bool validate_map_format(t_game *t);
 char *retrieve_color(char request, char *token, t_game *t); 
 void manip_reset(t_game *t);
 bool do_exist(const char *path);
+bool ft_iselement(char *str);
 size_t size_for_line_count(const char *name);
 size_t size_for_path(char *request, t_game *t); 
 size_t size_for_color_token(char request, t_game *t);
-size_t size_for_new_db(t_game *t); /* END PARSING */
+size_t size_for_new_db(t_game *t, t_manip *m); /* END PARSING */
 #endif //HEADER_H

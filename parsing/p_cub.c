@@ -34,11 +34,11 @@ static bool send_map_struct(t_game *t)
     while (i < t->map.line_count)
     {
         line = get_next_line(t->map.fd);
-        if (!line)
-            break;
         t->map.db[i++] = ft_strdup(line);
         free(line);
     }
+    while ((line = get_next_line(t->map.fd)) != NULL)
+        free(line);
     t->map.db[i] = NULL;
     close(t->map.fd);
     return (true);

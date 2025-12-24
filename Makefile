@@ -2,11 +2,6 @@ NAME	= cub3d
 CC		= clang
 CFLAGS	= -g -Wall -Wextra -Werror
 
-MLX_FILE	=	libmlx.a
-MLX_PATH	=	./mlx/
-MLX_LIB		=	$(addprefix $(MLX_PATH), $(MLX_FILE))
-MLX_FLAGS	=	-L$(MLX_PATH) -lmlx -L/usr/lib -lXext -lX11 -lm -lz
-
 SRCS	= main.c \
 		  parsing/p_entry.c \
 		  parsing/p_name.c \
@@ -29,18 +24,14 @@ all: $(NAME)
 $(LIBFT):
 	make -C libft
 
-$(MLX_LIB):
-	make -C $(MLX_PATH)
-
 %.o: %.c
-	$(CC) $(CFLAGS) -I/usr/include -I$(MLX_PATH) -O3 -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(LIBFT) $(MLX_LIB) $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLX_FLAGS)
+$(NAME): $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
 
 clean:
 	rm -f $(OBJS)
-	@make clean -sC $(MLX_PATH)
 	make -C libft clean
 
 fclean: clean

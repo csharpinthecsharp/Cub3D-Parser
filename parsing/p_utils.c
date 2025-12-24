@@ -31,3 +31,18 @@ bool do_exist(const char *path)
     close(fd);
     return (true);
 }
+
+bool ft_iselement(char *str)
+{
+    size_t i = 0;
+
+    while (str[i])
+    {
+        if (!(ft_isspace(str[i]) || str[i] == '1' || 
+              str[i] == '0' || str[i] == 'S' || str[i] == 'N' ||
+              str[i] == 'W' || str[i] == 'E' || str[i] == '\n'))
+            return false;
+        i++;
+    }
+    return true;
+}
