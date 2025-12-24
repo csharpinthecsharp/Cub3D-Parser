@@ -48,7 +48,7 @@ size_t size_for_color_token(char request, t_game *t)
         t->manip.b = 0;
         while (t->map.db[t->manip.a][t->manip.b])
         {
-            if (t->manip.eof && (t->map.db[t->manip.a][t->manip.b] != ' '))
+            if (t->manip.eof && !ft_isspace(t->map.db[t->manip.a][t->manip.b]))
                 t->manip.count++;
             if (t->map.db[t->manip.a][t->manip.b] == request)
             {
@@ -61,6 +61,12 @@ size_t size_for_color_token(char request, t_game *t)
         t->manip.a++;
     }
     return (t->manip.count);
+}
+
+size_t size_for_new_db(t_game *t)
+{
+    (void)t;
+    return (1);
 }
 
 size_t size_for_line_count(const char *name)

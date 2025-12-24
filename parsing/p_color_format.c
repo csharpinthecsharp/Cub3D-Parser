@@ -32,10 +32,10 @@ static int *color_tokenizer(char *token, int *holder, t_game *t)
     manip_reset(t);
     while (token[t->manip.a] && holder[t->manip.b] > -1)
     {
-        if (!(ft_isdigit(token[t->manip.a]) || (token[t->manip.a] == ' ') 
-            || (token[t->manip.a] == ',') || (token[t->manip.a] == '\n')))
+        if (!(ft_isdigit(token[t->manip.a]) && !(ft_isspace(token[t->manip.a]))) 
+            && (token[t->manip.a] != ',') && (token[t->manip.a] != '\n'))
             return (free(holder), NULL);
-        while (token[t->manip.a] == ' ')
+        while (ft_isspace(token[t->manip.a]))
             t->manip.a++;
         if (token[t->manip.a] == ',')
         {

@@ -16,12 +16,12 @@ bool validate_format(t_game *t)
 {
     if (!validate_path_format(t))
     {
-        ft_fperror("The colors format was not accepted.", STDERR_FILENO, true);
+        ft_fperror("The path format was not accepted.", STDERR_FILENO, true);
         return (false);
     }
     if (!validate_color_format(t))
     {
-        ft_fperror("The paths format was not accepted.", STDERR_FILENO, true);
+        ft_fperror("The colors format was not accepted.", STDERR_FILENO, true);
         return (false);
     }
     if (!validate_global_format(t))
@@ -34,6 +34,5 @@ bool validate_format(t_game *t)
         ft_fperror("The map format was not accepted.", STDERR_FILENO, true);
         return (false);
     }
-    // (1) handleDuplication Paths/Colors.
     return (true);
 }

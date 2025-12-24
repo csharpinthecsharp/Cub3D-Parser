@@ -24,11 +24,21 @@ int main( int ac, char **av )
         ft_fperror("Expected 1 argument (*.cub)!", STDERR_FILENO, true);
         return (1);
     }
+    /*
+    Step 1: Parsing
+    */
     if (!parsing_main(t, av[1]))
     {
         free_main(t);
         return (1);
     }
+    /*
+    Step 2: MLX Initialization
+
+    Step 3: Texture Loading
+
+    Step 4: Raycasting & Rendering
+    */
     free_main(t);
     return (0);
 }

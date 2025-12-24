@@ -14,7 +14,7 @@
 
 void debug(t_game *t, bool verbose)
 {
-    int i;
+    size_t i;
 
     i = 0;
     if (verbose)
@@ -34,6 +34,12 @@ void debug(t_game *t, bool verbose)
             printf("C_COLOR: %d\n", t->color.C[i]);
             i++;
         }
+        i = 0;
+        while (t->map.valid_map[i])
+        {
+            printf("%s", t->map.valid_map[i]);
+            i++;
+        }
     }
 }
 
@@ -46,6 +52,8 @@ bool parsing_main(t_game *t, const char *name)
         return (false);
     if (!validate_format(t))
         return (false);
-    debug(t, true);
+    debug(t, false);
+
+    // -> Start MLX Init/Game.
     return (true);
 }

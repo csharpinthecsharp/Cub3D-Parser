@@ -18,9 +18,20 @@ static void free_map(t_game *t)
 
     i = 0;
     free(t->map.name);
-    while (i < t->map.line_count)
-        free(t->map.db[i++]);
-    free(t->map.db);
+    if (t->map.db)
+    {
+        while (i < (t->map.line_count))
+            free(t->map.db[i++]);
+        free(t->map.db);
+    }
+
+    i = 0;
+    if (t->map.valid_map)
+    {
+        while (t->map.valid_map[i])
+            free(t->map.valid_map[i++]);
+        free(t->map.valid_map);
+    }
     return ;
 }
 

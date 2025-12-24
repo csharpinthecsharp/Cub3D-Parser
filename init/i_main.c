@@ -72,7 +72,11 @@ bool init_color(t_game *t, char type)
     if (!t->color.token)
         return (false);
     t->color.token = retrieve_color(type, t->color.token, t);
+    if (!t->color.token)
+        return (false);
     *clr_ptr = ft_calloc(MAX_LEN_RGB + 1, sizeof(int));
+    if (!t->color.token)
+        return (false);
     (*clr_ptr)[MAX_LEN_RGB] = -1;
     return (true);
 }
@@ -96,6 +100,7 @@ void init_main(t_game *t, const char *map_name)
     t->path.WE = NULL;
     t->color.token = NULL;
     t->color.C = NULL;
+    t->map.valid_map = NULL;
     t->color.F = NULL;
     t->loc.F = 0;
     t->loc.C = 0;

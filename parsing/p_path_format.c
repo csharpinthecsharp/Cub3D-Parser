@@ -25,7 +25,8 @@ static char *retrieve_path(char *request, char *token, t_game *t)
     token[t->manip.c++] = '\0';
     if (!ft_strlen(token))
         return (free(token), NULL);
-    return (ft_strtrim(token, "\n"));
+    char *no_nl = ft_strtrim(token, "\n");
+    return (free(token), no_nl);
 }
 
 bool validate_path_format(t_game *t)

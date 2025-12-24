@@ -9,6 +9,7 @@
 #include "mlx/mlx.h"
 
 #define MAX_LEN_RGB 3
+#define ELEMENTS 6
 
 typedef struct s_loc {
     size_t current;
@@ -36,6 +37,7 @@ typedef struct s_color {
 typedef struct s_map {
     char *name;
     char **db;
+    char **valid_map;
     int fd;
     size_t line_count;
     size_t name_len;
@@ -74,11 +76,11 @@ bool validate_path_format(t_game *t);
 bool validate_color_format(t_game *t);
 bool validate_global_format(t_game *t);
 bool validate_map_format(t_game *t);
-char *retrieve_color(char request, char *token, t_game *t);
-void clear_gnl(int fd); 
+char *retrieve_color(char request, char *token, t_game *t); 
 void manip_reset(t_game *t);
 bool do_exist(const char *path);
 size_t size_for_line_count(const char *name);
 size_t size_for_path(char *request, t_game *t); 
-size_t size_for_color_token(char request, t_game *t); /* END PARSING */
+size_t size_for_color_token(char request, t_game *t);
+size_t size_for_new_db(t_game *t); /* END PARSING */
 #endif //HEADER_H
