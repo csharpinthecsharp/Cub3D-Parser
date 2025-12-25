@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:23:13 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 18:21:40 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 23:16:34 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ bool	init_path(t_parse *t)
 	return (true);
 }
 
-void init_color_value(int *clr_ptr)
+void	init_color_value(int *clr_ptr)
 {
 	clr_ptr[0] = -1;
 	clr_ptr[1] = -1;

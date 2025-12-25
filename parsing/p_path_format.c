@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 02:20:46 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 21:08:10 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 22:21:26 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static char	*retrieve_path(char *request, char *token, t_parse *t)
 {
-	char	*no_nl;
-
 	manip_reset(&t->manip);
 	while (t->manip.a < t->map.line_count)
 	{
@@ -39,8 +37,7 @@ static char	*retrieve_path(char *request, char *token, t_parse *t)
 	token[t->manip.c++] = '\0';
 	if (!ft_strlen(token))
 		return (free(token), NULL);
-	no_nl = ft_strtrim(token, "\n");
-	return (free(token), no_nl);
+	return (token);
 }
 
 bool	validate_path_format(t_parse *t)

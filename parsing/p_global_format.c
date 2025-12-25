@@ -42,7 +42,7 @@ static void	push_line_to_db(t_parse *t, t_manip *m)
 		{
 			t->map.valid_map[m->b][m->d] = t->map.db[m->a][m->c];
 			if (ft_isplayer(t->map.valid_map[m->b][m->d]))
-			push_player_position(t, &t->manip);
+				push_player_position(t, &t->manip);
 			m->d++;
 		}
 		m->c++;
@@ -85,18 +85,14 @@ bool	validate_global_format(t_parse *t)
 	t->map.height = size_for_new_db(t, &t->manip);
 	if (t->map.height == 0)
 		return (false);
-
 	t->map.valid_map = malloc(sizeof(char *) * (t->map.height + 1));
 	if (!t->map.valid_map)
 		return (false);
-
 	manip_reset(&t->manip);
 	while (t->manip.a < t->map.height)
 		t->map.valid_map[t->manip.a++] = NULL;
-
 	if (!filter_db(t, &t->manip))
 		return (false);
-
 	if (!t->map.valid_map)
 		return (false);
 	return (true);

@@ -6,19 +6,18 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 01:29:18 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 21:56:19 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 23:18:11 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-int flood_fill(char **map, int x, int y, int height, t_parse *t)
+int	flood_fill(char **map, int x, int y, t_parse *t)
 {
-	int width;
-	
-	if (x >= height || x < 0)
+	int	width;
+
+	if (x >= t->map.height || x < 0)
 		return (0);
-		
 	width = ft_strlen(map[x]);
 	if (y >= width || y < 0)
 		return (0);
@@ -30,20 +29,20 @@ int flood_fill(char **map, int x, int y, int height, t_parse *t)
 		map[x][y] = 'V';
 	else
 		return (1);
-	if (flood_fill(map, x, y + 1, height, t) == 0)
+	if (flood_fill(map, x, y + 1, t) == 0)
 		return (0);
-	if (flood_fill(map, x + 1, y, height, t) == 0)
+	if (flood_fill(map, x + 1, y, t) == 0)
 		return (0);
-	if (flood_fill(map, x, y - 1, height, t) == 0)
+	if (flood_fill(map, x, y - 1, t) == 0)
 		return (0);
-	if (flood_fill(map, x - 1, y, height, t) == 0)
+	if (flood_fill(map, x - 1, y, t) == 0)
 		return (0);
 	return (1);
 }
 
-void free_copy(char **copy, size_t size)
+void	free_copy(char **copy, size_t size)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (i < size)
@@ -54,8 +53,11 @@ void free_copy(char **copy, size_t size)
 
 bool	validate_map_format(t_parse *t)
 {
-	size_t i = 0;
-	char **copy = malloc(sizeof(char *) * (t->map.height + 1));
+	size_t	i;
+	char	**copy;
+
+	i = 0;
+	copy = malloc(sizeof(char *) * (t->map.height + 1));
 	if (!copy)
 		return (false);
 	while (t->map.valid_map[i] != NULL)
@@ -64,9 +66,8 @@ bool	validate_map_format(t_parse *t)
 		i++;
 	}
 	copy[i] = NULL;
-	
 	manip_reset(&t->manip);
-	if (flood_fill(copy, t->player.x, t->player.y, t->map.height, t) == 0)
+	if (flood_fill(copy, t->player.x, t->player.y, t) == 0)
 	{
 		free_copy(copy, t->map.height);
 		return (false);

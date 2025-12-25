@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:22:44 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 01:29:38 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 23:08:29 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,14 @@ static bool	validate_name_format(const char *name)
 
 bool	validate_name(const char *name)
 {
-	if (name)
+	if (!(ft_strlen(name) > 4))
 	{
-		if (!(ft_strlen(name) > 4))
-		{
-			ft_fperror("Map name is wrong (len is <= 4)!", STDERR_FILENO, true);
-			return (false);
-		}
-		if (!validate_name_format(name))
-		{
-			ft_fperror("Map name is wrong (Missing .cub)!", STDERR_FILENO,
-				true);
-			return (false);
-		}
-		return (true);
+		ft_puterror("Map name size should be greater");
 	}
-	ft_fperror("Wrong map format!", STDERR_FILENO, true);
-	return (false);
+	if (!validate_name_format(name))
+	{
+		ft_puterror("Map name contains no .cub!");
+		return (false);
+	}
+	return (true);
 }

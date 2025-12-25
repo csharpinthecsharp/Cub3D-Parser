@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 01:31:08 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 18:24:51 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 23:15:10 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct s_map
 	char		**db;
 	size_t		line_count;
 	int			fd;
-	
 	char		**valid_map;
 	size_t		height;
 	size_t		current;

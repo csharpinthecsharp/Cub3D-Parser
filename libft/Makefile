@@ -44,6 +44,8 @@ SRC = ft_atoi.c \
       get_next_line.c \
       get_next_line_utils.c \
       ft_isspace.c \
+      ft_puterror.c \
+      ft_putgood.c \
 
 OBJ = $(SRC:.c=.o)
 

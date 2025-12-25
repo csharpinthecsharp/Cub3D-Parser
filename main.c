@@ -6,37 +6,11 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:22:59 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 21:39:41 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 23:14:40 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/header.h"
-
-void	debug(t_parse *t, bool verbose)
-{
-	size_t	i;
-
-	i = 0;
-	if (verbose)
-	{
-		printf("NORTH: %s\n", t->path.no);
-		printf("SOUTH: %s\n", t->path.so);
-		printf("EAST: %s\n", t->path.ea);
-		printf("WEST: %s\n", t->path.we);
-		i = 0;
-		while (i < 3)
-			printf("F_COLOR: %d\n", t->color.f[i++]);
-		i = 0;
-		while (i < 3)
-			printf("C_COLOR: %d\n", t->color.c[i++]);
-		i = 0;
-		while (t->map.valid_map[i])
-			printf("%s", t->map.valid_map[i++]);
-		printf("P_DIRECTION: %c\n", t->player.direction);
-		printf("P_X: %d\n", t->player.x);
-		printf("P_Y: %d\n", t->player.y);
-	}
-}
 
 int	main(int ac, char **av)
 {
@@ -46,15 +20,16 @@ int	main(int ac, char **av)
 	t = &par;
 	if (ac != 2)
 	{
-		ft_fperror("Expected 1 argument (*.cub)!", STDERR_FILENO, true);
+		ft_puterror("Expected 1 argument (*.cub)!");
 		return (1);
 	}
 	if (!parsing_main(t, av[1]))
 	{
+		ft_puterror("Parsing failed, exiting!");
 		free_parsing(t);
 		return (1);
 	}
-	debug(t, true);
+	ft_putgood("Parsing succeeded, starting!");
 	free_parsing(t);
 	return (0);
 }

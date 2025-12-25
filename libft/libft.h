@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 12:32:27 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/10/24 14:24:27 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 23:00:49 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+void	ft_puterror(char *str);
+void	ft_putgood(char *str);
 int		ft_isspace(int c);
 char	*ft_strndup(const char *s, size_t n);
 char	*get_next_line(int fd);

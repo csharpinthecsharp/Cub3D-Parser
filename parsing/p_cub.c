@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:22:49 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 21:07:55 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 23:08:37 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,16 @@ bool	validate_cub(t_parse *t)
 {
 	if (!open_map(t))
 	{
-		ft_fperror("Map path not found!", STDERR_FILENO, true);
+		ft_puterror("Map path not found!");
 		return (false);
 	}
+	ft_putgood("Map path found!");
 	if (!send_map_struct(t))
 	{
-		ft_fperror("Failed to load the map struct!", STDERR_FILENO, true);
+		ft_puterror("Failed to load the map struct!");
 		close(t->map.fd);
 		return (false);
 	}
+	ft_putgood("Succesfully loaded the map struct!");
 	return (true);
 }

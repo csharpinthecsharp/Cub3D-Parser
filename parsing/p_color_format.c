@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 01:12:59 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 21:48:31 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 23:18:25 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*retrieve_color(char request, char *token, t_parse *t)
 	return (token);
 }
 
-static bool add_color_to_ptr(char *token, int *ptr, t_manip *m)
+static bool	add_color_to_ptr(char *token, int *ptr, t_manip *m)
 {
 	if (token[m->a] == ',')
 	{
@@ -57,26 +57,27 @@ static bool add_color_to_ptr(char *token, int *ptr, t_manip *m)
 			return (false);
 	}
 	else
-        return (false);
+		return (false);
 	return (true);
 }
-static bool color_tokenizer(char *token, int *ptr, t_manip *m)
+
+static bool	color_tokenizer(char *token, int *ptr, t_manip *m)
 {
-    manip_reset(m);
-    while (token[m->a] && m->b < 3)
-    {
-        if (ft_isspace(token[m->a]))
-        {
-            m->a++;
-            continue;
-        }
-        if (!add_color_to_ptr(token, ptr, m))
+	manip_reset(m);
+	while (token[m->a] && m->b < 3)
+	{
+		if (ft_isspace(token[m->a]))
+		{
+			m->a++;
+			continue ;
+		}
+		if (!add_color_to_ptr(token, ptr, m))
 			return (false);
-        m->a++;
-    }
-    if (m->count != 2 || ptr[0] == -1 || ptr[1] == -1 || ptr[2] == -1)
-        return (false);
-    return (true);
+		m->a++;
+	}
+	if (m->count != 2 || ptr[0] == -1 || ptr[1] == -1 || ptr[2] == -1)
+		return (false);
+	return (true);
 }
 
 bool	validate_color_format(t_parse *t)
@@ -85,7 +86,6 @@ bool	validate_color_format(t_parse *t)
 		return (false);
 	if (!color_tokenizer(t->color.token, t->color.f, &t->manip))
 		return (false);
-	
 	if (!init_color(t, 'C'))
 		return (false);
 	if (!color_tokenizer(t->color.token, t->color.c, &t->manip))
