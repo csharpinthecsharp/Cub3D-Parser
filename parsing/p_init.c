@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:23:13 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 02:04:19 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 12:43:34 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,19 @@ bool	init_path(t_parse *t)
 	t->path.no = malloc(sizeof(char) * (size_for_path("NO", t) + 1));
 	if (!t->path.no)
 		return (false);
-	t->loc.no = t->loc.current;
+	t->path.loc[0] = t->map.current;
 	t->path.ea = malloc(sizeof(char) * (size_for_path("EA", t) + 1));
 	if (!t->path.ea)
 		return (false);
-	t->loc.ea = t->loc.current;
+	t->path.loc[1] = t->map.current;
 	t->path.so = malloc(sizeof(char) * (size_for_path("SO", t) + 1));
 	if (!t->path.so)
 		return (false);
-	t->loc.so = t->loc.current;
+	t->path.loc[2] = t->map.current;
 	t->path.we = malloc(sizeof(char) * (size_for_path("WE", t) + 1));
 	if (!t->path.we)
 		return (false);
-	t->loc.we = t->loc.current;
+	t->path.loc[3] = t->map.current;
 	return (true);
 }
 
@@ -54,16 +54,16 @@ bool	init_color(t_parse *t, char type)
 	if (type == 'F')
 	{
 		clr_ptr = &t->color.f;
-		loc_ptr = &t->loc.f;
+		loc_ptr = &t->color.loc[0];
 	}
 	else
 	{
 		free(t->color.token);
 		clr_ptr = &t->color.c;
-		loc_ptr = &t->loc.c;
+		loc_ptr = &t->color.loc[1];
 	}
 	len = size_for_color_token(type, t);
-	*loc_ptr = t->loc.current;
+	*loc_ptr = t->map.current;
 	t->color.token = malloc(sizeof(char) * (len + 1));
 	if (!t->color.token)
 		return (false);
@@ -93,14 +93,8 @@ void	init_parsing(t_parse *t, const char *map_name)
 	t->color.c = NULL;
 	t->map.valid_map = NULL;
 	t->color.f = NULL;
-	t->loc.f = 0;
-	t->loc.c = 0;
-	t->loc.we = 0;
-	t->loc.so = 0;
-	t->loc.ea = 0;
-	t->loc.no = 0;
 	t->player.direction = '0';
 	t->player.x = 0;
 	t->player.y = 0;
-	t->loc.current = 0;
+	t->map.current = 0;
 }

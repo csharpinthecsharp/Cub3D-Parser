@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:22:59 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 02:04:09 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 14:33:00 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	debug(t_parse *t, bool verbose)
 		i = 0;
 		while (t->map.valid_map[i])
 		{
-			printf("%s", t->map.valid_map[i]);
+			printf("%s\n", t->map.valid_map[i]);
 			i++;
 		}
 		printf("P_DIRECTION: %c\n", t->player.direction);

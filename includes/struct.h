@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 01:31:08 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 01:31:51 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 14:04:21 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,13 @@
 
 # include <stdlib.h>
 
-typedef struct s_loc
-{
-	size_t		current;
-	size_t		no;
-	size_t		so;
-	size_t		we;
-	size_t		ea;
-	size_t		f;
-	size_t		c;
-}				t_loc;
-
 typedef struct s_path
 {
 	char		*no;
 	char		*so;
 	char		*we;
 	char		*ea;
+	size_t		loc[4];
 }				t_path;
 
 typedef struct s_color
@@ -39,6 +29,7 @@ typedef struct s_color
 	char		*token;
 	int			*f;
 	int			*c;
+	size_t		loc[2];
 }				t_color;
 
 typedef struct s_player
@@ -51,11 +42,14 @@ typedef struct s_player
 typedef struct s_map
 {
 	char		*name;
-	char		**db;
-	char		**valid_map;
-	int			fd;
-	size_t		line_count;
 	size_t		name_len;
+	char		**db;
+	size_t		line_count;
+	int			fd;
+	
+	char		**valid_map;
+	size_t		height;
+	size_t		current;
 }				t_map;
 
 typedef struct s_manip
@@ -74,7 +68,6 @@ typedef struct s_parse
 	t_color		color;
 	t_path		path;
 	t_manip		manip;
-	t_loc		loc;
 	t_player	player;
 }				t_parse;
 

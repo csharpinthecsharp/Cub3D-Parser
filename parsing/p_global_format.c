@@ -6,26 +6,26 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 01:19:08 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 02:25:14 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 14:36:47 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-static void	remove_line(t_map *m, t_loc *t)
+static void	remove_line(t_map *m, t_path *p, t_color *c)
 {
-	free(m->db[t->so]);
-	m->db[t->so] = NULL;
-	free(m->db[t->no]);
-	m->db[t->no] = NULL;
-	free(m->db[t->ea]);
-	m->db[t->ea] = NULL;
-	free(m->db[t->we]);
-	m->db[t->we] = NULL;
-	free(m->db[t->f]);
-	m->db[t->f] = NULL;
-	free(m->db[t->c]);
-	m->db[t->c] = NULL;
+	free(m->db[p->loc[0]]);
+	m->db[p->loc[0]] = NULL;
+	free(m->db[p->loc[1]]);
+	m->db[p->loc[1]] = NULL;
+	free(m->db[p->loc[2]]);
+	m->db[p->loc[2]] = NULL;
+	free(m->db[p->loc[3]]);
+	m->db[p->loc[3]] = NULL;
+	free(m->db[c->loc[0]]);
+	m->db[c->loc[0]] = NULL;
+	free(m->db[c->loc[1]]);
+	m->db[c->loc[1]] = NULL;
 }
 
 static void	push_player_position(t_parse *t, t_manip *m)
@@ -40,8 +40,6 @@ static void	push_line_to_db(t_parse *t, t_manip *m)
 	{
 		if (t->map.db[m->a][m->c] != '\n')
 		{
-			while (ft_isspace(t->map.db[m->a][m->c]))
-				m->c++;
 			t->map.valid_map[m->b][m->d++] = t->map.db[m->a][m->c];
 			if (ft_isplayer(t->map.valid_map[m->b][m->d - 1]))
 				push_player_position(t, &t->manip);
@@ -79,14 +77,11 @@ static bool	filter_db(t_parse *t, t_manip *m)
 
 bool	validate_global_format(t_parse *t)
 {
-	size_t	len;
-
-	(void)len;
-	remove_line(&t->map, &t->loc);
-	len = size_for_new_db(t, &t->manip);
-	if (len == 0)
+	remove_line(&t->map, &t->path, &t->color);
+	t->map.height = size_for_new_db(t, &t->manip);
+	if (t->map.height == 0)
 		return (false);
-	t->map.valid_map = malloc(sizeof(char *) * (len + 1));
+	t->map.valid_map = malloc(sizeof(char *) * (t->map.height + 1));
 	if (!t->map.valid_map)
 		return (false);
 	if (!filter_db(t, &t->manip))

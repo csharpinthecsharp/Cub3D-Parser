@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:23:02 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 02:22:26 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 12:42:08 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ size_t	size_for_path(char *request, t_parse *t)
 			if ((t->map.db[t->manip.a][t->manip.b] == request[0])
 				&& (t->map.db[t->manip.a][t->manip.b + 1] == request[1]))
 			{
-				t->loc.current = t->manip.a;
+				t->map.current = t->manip.a;
 				t->manip.eof = true;
 				t->manip.b++;
 			}
@@ -52,7 +52,7 @@ size_t	size_for_color_token(char request, t_parse *t)
 				t->manip.count++;
 			if (t->map.db[t->manip.a][t->manip.b] == request)
 			{
-				t->loc.current = t->manip.a;
+				t->map.current = t->manip.a;
 				t->manip.eof = true;
 				t->manip.b++;
 			}
