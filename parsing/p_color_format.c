@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 01:12:59 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 18:22:13 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 21:48:31 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static bool add_color_to_ptr(char *token, int *ptr, t_manip *m)
 	}
 	else if (ft_isdigit(token[m->a]))
 	{
+		if (ptr[m->b] == -1)
+			ptr[m->b] = 0;
 		ptr[m->b] = ptr[m->b] * 10 + token[m->a] - '0';
 		if (ptr[m->b] > 255)
 			return (false);

@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:22:59 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 16:55:04 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 21:39:41 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,15 @@ void	debug(t_parse *t, bool verbose)
 		printf("SOUTH: %s\n", t->path.so);
 		printf("EAST: %s\n", t->path.ea);
 		printf("WEST: %s\n", t->path.we);
-		while (t->color.c[i] > -1)
-		{
-			printf("F_COLOR: %d\n", t->color.f[i]);
-			i++;
-		}
 		i = 0;
-		while (t->color.f[i] > -1)
-		{
-			printf("C_COLOR: %d\n", t->color.c[i]);
-			i++;
-		}
+		while (i < 3)
+			printf("F_COLOR: %d\n", t->color.f[i++]);
+		i = 0;
+		while (i < 3)
+			printf("C_COLOR: %d\n", t->color.c[i++]);
 		i = 0;
 		while (t->map.valid_map[i])
-		{
-			printf("%s\n", t->map.valid_map[i]);
-			i++;
-		}
+			printf("%s", t->map.valid_map[i++]);
 		printf("P_DIRECTION: %c\n", t->player.direction);
 		printf("P_X: %d\n", t->player.x);
 		printf("P_Y: %d\n", t->player.y);
@@ -62,7 +54,7 @@ int	main(int ac, char **av)
 		free_parsing(t);
 		return (1);
 	}
-	debug(t, false);
+	debug(t, true);
 	free_parsing(t);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 01:29:18 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 18:21:05 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 21:56:19 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 int flood_fill(char **map, int x, int y, int height, t_parse *t)
 {
+	int width;
+	
 	if (x >= height || x < 0)
 		return (0);
-	int width = ft_strlen(map[x]);
+		
+	width = ft_strlen(map[x]);
 	if (y >= width || y < 0)
 		return (0);
 	if (map[x][y] == ' ')

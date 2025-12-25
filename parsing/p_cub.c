@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:22:49 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 17:29:08 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 21:07:55 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static bool	send_map_struct(t_parse *t)
 		t->map.db[i++] = ft_strdup(line);
 		free(line);
 	}
-	while (line != NULL)
+	while (line)
 	{
 		line = get_next_line(t->map.fd);
 		free(line);
