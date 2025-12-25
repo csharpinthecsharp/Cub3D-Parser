@@ -13,8 +13,8 @@ SRCS	= main.c \
 		  parsing/p_map_format.c \
 		  parsing/p_global_format.c \
 		  parsing/p_alloc_sizes.c \
-		  init/i_main.c \
-		  free/f_main.c \
+		  parsing/p_init.c \
+		  parsing/p_free.c \
 
 OBJS	= $(SRCS:.c=.o)
 LIBFT 	= libft/libft.a

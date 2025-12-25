@@ -13,16 +13,16 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
-#define BUFFER_SIZE 1
+# define BUFFER_SIZE 1
 # include <stdarg.h>
+# include <stdbool.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdbool.h>
 
-int ft_isspace(int c);
+int		ft_isspace(int c);
 char	*ft_strndup(const char *s, size_t n);
 char	*get_next_line(int fd);
-void    ft_fperror(char* msg, int file, bool flush);
+void	ft_fperror(char *msg, int file, bool flush);
 long	ft_atoi(const char *str);
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 void	ft_bzero(void *s, size_t n);

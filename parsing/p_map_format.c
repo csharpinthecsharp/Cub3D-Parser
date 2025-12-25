@@ -1,8 +1,19 @@
-#include "../header.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   p_map_format.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/25 01:29:18 by ltrillar          #+#    #+#             */
+/*   Updated: 2025/12/25 01:29:25 by ltrillar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-bool validate_map_format(t_game *t)
+#include "../includes/header.h"
+
+bool	validate_map_format(t_parse *t)
 {
-    (void)t;
-    // Pour check si la map est surrounded by walls -> Flood fill
-    return (true);
+	(void)t;
+	return (true);
 }

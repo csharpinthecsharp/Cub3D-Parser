@@ -6,39 +6,63 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:22:59 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/22 14:37:21 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 02:04:09 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "includes/header.h"
 
-int main( int ac, char **av )
+void	debug(t_parse *t, bool verbose)
 {
-    // https://harm-smits.github.io/42docs/projects/cub3d <--- FOR RAYCASTING
-    (void)av;
-    t_game game;
-    t_game *t;
-    t = &game;
-    if (ac != 2)
-    {
-        ft_fperror("Expected 1 argument (*.cub)!", STDERR_FILENO, true);
-        return (1);
-    }
-    /*
-    Step 1: Parsing
-    */
-    if (!parsing_main(t, av[1]))
-    {
-        free_main(t);
-        return (1);
-    }
-    /*
-    Step 2: MLX Initialization
+	size_t	i;
 
-    Step 3: Texture Loading
+	i = 0;
+	if (verbose)
+	{
+		printf("NORTH: %s\n", t->path.no);
+		printf("SOUTH: %s\n", t->path.so);
+		printf("EAST: %s\n", t->path.ea);
+		printf("WEST: %s\n", t->path.we);
+		while (t->color.c[i] > -1)
+		{
+			printf("F_COLOR: %d\n", t->color.f[i]);
+			i++;
+		}
+		i = 0;
+		while (t->color.f[i] > -1)
+		{
+			printf("C_COLOR: %d\n", t->color.c[i]);
+			i++;
+		}
+		i = 0;
+		while (t->map.valid_map[i])
+		{
+			printf("%s", t->map.valid_map[i]);
+			i++;
+		}
+		printf("P_DIRECTION: %c\n", t->player.direction);
+		printf("P_X: %d\n", t->player.x);
+		printf("P_Y: %d\n", t->player.y);
+	}
+}
 
-    Step 4: Raycasting & Rendering
-    */
-    free_main(t);
-    return (0);
+int	main(int ac, char **av)
+{
+	t_parse	par;
+	t_parse	*t;
+
+	t = &par;
+	if (ac != 2)
+	{
+		ft_fperror("Expected 1 argument (*.cub)!", STDERR_FILENO, true);
+		return (1);
+	}
+	if (!parsing_main(t, av[1]))
+	{
+		free_parsing(t);
+		return (1);
+	}
+	debug(t, true);
+	free_parsing(t);
+	return (0);
 }
