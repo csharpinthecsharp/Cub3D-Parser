@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:23:16 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 01:32:29 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 17:54:35 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,17 @@ static void	free_map(t_parse *t)
 
 	i = 0;
 	free(t->map.name);
-	if (t->map.db)
+	if (t->map.line_count)
 	{
 		while (i < (t->map.line_count))
 			free(t->map.db[i++]);
 		free(t->map.db);
 	}
 	i = 0;
-	if (t->map.valid_map != NULL)
+	if (t->map.valid_map)
 	{
-		while (t->map.valid_map[i])
-		{
-			free(t->map.valid_map[i]);
-			i++;
-		}
+		while (i < t->map.height)
+			free(t->map.valid_map[i++]);
 		free(t->map.valid_map);
 	}
 	return ;
@@ -48,8 +45,6 @@ static void	free_path(t_parse *t)
 static void	free_color(t_parse *t)
 {
 	free(t->color.token);
-	free(t->color.c);
-	free(t->color.f);
 }
 
 void	free_parsing(t_parse *t)

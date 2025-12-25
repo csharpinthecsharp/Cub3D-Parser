@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:23:02 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 12:42:08 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 18:20:42 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	size_for_path(char *request, t_parse *t)
 {
-	manip_reset(t);
+	manip_reset(&t->manip);
 	while (t->manip.a < t->map.line_count)
 	{
 		if (t->manip.eof)
@@ -40,7 +40,7 @@ size_t	size_for_path(char *request, t_parse *t)
 
 size_t	size_for_color_token(char request, t_parse *t)
 {
-	manip_reset(t);
+	manip_reset(&t->manip);
 	while (t->manip.a < t->map.line_count)
 	{
 		if (t->manip.eof)
@@ -65,7 +65,7 @@ size_t	size_for_color_token(char request, t_parse *t)
 
 size_t	size_for_new_db(t_parse *t, t_manip *m)
 {
-	manip_reset(t);
+	manip_reset(m);
 	while (m->a++ < t->map.line_count)
 	{
 		if (t->map.db[m->a] != NULL)
@@ -101,6 +101,8 @@ size_t	size_for_line_count(const char *name)
 	count = 0;
 	line = NULL;
 	fd = open(name, O_RDONLY);
+	if (fd < 0)
+		return (0);
 	while (1)
 	{
 		line = get_next_line(fd);

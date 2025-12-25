@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 01:19:08 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 14:36:47 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 18:22:41 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,20 @@ static void	push_player_position(t_parse *t, t_manip *m)
 
 static void	push_line_to_db(t_parse *t, t_manip *m)
 {
-	while (t->map.db[m->a][m->c++])
+	while (t->map.db[m->a][m->c])
 	{
-		if (t->map.db[m->a][m->c] != '\n')
-		{
-			t->map.valid_map[m->b][m->d++] = t->map.db[m->a][m->c];
-			if (ft_isplayer(t->map.valid_map[m->b][m->d - 1]))
-				push_player_position(t, &t->manip);
-		}
+		t->map.valid_map[m->b][m->d] = t->map.db[m->a][m->c];
+		if (ft_isplayer(t->map.valid_map[m->b][m->d]))
+			push_player_position(t, &t->manip);
+		m->d++;
+		m->c++;
 	}
+	t->map.valid_map[m->b][m->d] = '\0';
 }
 
 static bool	filter_db(t_parse *t, t_manip *m)
 {
-	manip_reset(t);
+	manip_reset(m);
 	while (m->a < t->map.line_count)
 	{
 		if (t->map.db[m->a] != NULL)
@@ -59,14 +59,12 @@ static bool	filter_db(t_parse *t, t_manip *m)
 			{
 				if (!ft_iselement(t->map.db[m->a], true, t))
 					return (false);
-				m->count--;
 				t->map.valid_map[m->b] = malloc(sizeof(char) * (m->count + 1));
 				if (!t->map.valid_map[m->b])
 					return (false);
 				m->d = 0;
 				m->c = 0;
 				push_line_to_db(t, m);
-				t->map.valid_map[m->b][m->d] = '\0';
 				m->b++;
 			}
 		}

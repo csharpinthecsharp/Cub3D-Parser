@@ -1,9 +1,11 @@
-NO tests/textures/wal.xpm
-SO tests/textures/bricks.xpm
-WE tests/textures/gold.xpm
-EA tests/textures/wood.xpm
-F 220,111,119
-C 225,111,200
+NO ./maps/test.xpm
+SO ./maps/test.xpm
+WE ./maps/test.xpm
+EA ./maps/test.xpm
+
+F 220,100,0
+C 220,200,
+
 
  11111111111111111111111111111111111111
 1000000000000000000000000000000000000001

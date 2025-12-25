@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 01:29:18 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 14:36:46 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 18:21:05 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ bool	validate_map_format(t_parse *t)
 	}
 	copy[i] = NULL;
 	
-	manip_reset(t);
+	manip_reset(&t->manip);
 	if (flood_fill(copy, t->player.x, t->player.y, t->map.height, t) == 0)
 	{
 		free_copy(copy, t->map.height);

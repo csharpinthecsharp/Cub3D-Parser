@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 01:31:06 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 01:31:06 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 18:19:26 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	validate_color_format(t_parse *t);
 bool	validate_global_format(t_parse *t);
 bool	validate_map_format(t_parse *t);
 char	*retrieve_color(char request, char *token, t_parse *t);
-void	manip_reset(t_parse *t);
+void	manip_reset(t_manip *m);
 bool	do_exist(const char *path);
 bool	ft_iselement(char *str, bool find_for_player, t_parse *t);
 bool	ft_isplayer(char c);

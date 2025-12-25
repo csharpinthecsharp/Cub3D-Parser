@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:23:13 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 12:43:34 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 18:21:40 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 bool	init_map(t_parse *t)
 {
 	t->map.line_count = size_for_line_count(t->map.name);
+	if (t->map.line_count == 0)
+		return (false);
 	t->map.db = malloc(sizeof(char *) * (t->map.line_count + 1));
 	if (!t->map.db)
 	{
@@ -45,21 +47,28 @@ bool	init_path(t_parse *t)
 	return (true);
 }
 
+void init_color_value(int *clr_ptr)
+{
+	clr_ptr[0] = -1;
+	clr_ptr[1] = -1;
+	clr_ptr[2] = -1;
+}
+
 bool	init_color(t_parse *t, char type)
 {
 	size_t	len;
-	int		**clr_ptr;
+	int		*clr_ptr;
 	size_t	*loc_ptr;
 
 	if (type == 'F')
 	{
-		clr_ptr = &t->color.f;
+		clr_ptr = t->color.f;
 		loc_ptr = &t->color.loc[0];
 	}
 	else
 	{
 		free(t->color.token);
-		clr_ptr = &t->color.c;
+		clr_ptr = t->color.c;
 		loc_ptr = &t->color.loc[1];
 	}
 	len = size_for_color_token(type, t);
@@ -70,16 +79,13 @@ bool	init_color(t_parse *t, char type)
 	t->color.token = retrieve_color(type, t->color.token, t);
 	if (!t->color.token)
 		return (false);
-	*clr_ptr = ft_calloc(3 + 1, sizeof(int));
-	if (!t->color.token)
-		return (false);
-	(*clr_ptr)[3] = -1;
+	init_color_value(clr_ptr);
 	return (true);
 }
 
 void	init_parsing(t_parse *t, const char *map_name)
 {
-	manip_reset(t);
+	manip_reset(&t->manip);
 	t->map.name = ft_strdup(map_name);
 	t->map.name_len = ft_strlen(map_name);
 	t->map.db = NULL;
@@ -90,9 +96,7 @@ void	init_parsing(t_parse *t, const char *map_name)
 	t->path.so = NULL;
 	t->path.we = NULL;
 	t->color.token = NULL;
-	t->color.c = NULL;
 	t->map.valid_map = NULL;
-	t->color.f = NULL;
 	t->player.direction = '0';
 	t->player.x = 0;
 	t->player.y = 0;

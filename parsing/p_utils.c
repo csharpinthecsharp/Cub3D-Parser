@@ -6,20 +6,20 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:22:53 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 01:34:40 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 18:21:26 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-void	manip_reset(t_parse *t)
+void	manip_reset(t_manip *m)
 {
-	t->manip.a = 0;
-	t->manip.b = 0;
-	t->manip.c = 0;
-	t->manip.d = 0;
-	t->manip.eof = false;
-	t->manip.count = 0;
+	m->a = 0;
+	m->b = 0;
+	m->c = 0;
+	m->d = 0;
+	m->eof = false;
+	m->count = 0;
 }
 
 bool	do_exist(const char *path)
@@ -46,7 +46,7 @@ bool	ft_iselement(char *str, bool find_for_player, t_parse *t)
 	i = 0;
 	while (str[i])
 	{
-		if (!((ft_isspace(str[i]) || str[i] == '1' || str[i] == '\n'
+		if (!((ft_isspace(str[i]) || str[i] == '1'
 					|| str[i] == '0')))
 		{
 			if (!ft_isplayer(str[i]))

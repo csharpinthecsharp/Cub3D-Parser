@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 01:31:08 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 14:04:21 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 17:51:26 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ typedef struct s_path
 typedef struct s_color
 {
 	char		*token;
-	int			*f;
-	int			*c;
+	int			f[3];
+	int			c[3];
 	size_t		loc[2];
 }				t_color;
 

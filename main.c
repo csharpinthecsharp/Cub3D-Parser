@@ -6,7 +6,7 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 14:22:59 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 14:33:00 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/25 16:55:04 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(int ac, char **av)
 		free_parsing(t);
 		return (1);
 	}
-	debug(t, true);
+	debug(t, false);
 	free_parsing(t);
 	return (0);
 }
