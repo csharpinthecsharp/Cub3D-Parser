@@ -57,7 +57,7 @@ Cub3D-Parser/
 ├── parsing/           The parser code
 │   ├── p_entry.c     Stages 1-3: Basic validation
 │   ├── p_format.c    Stage 4: Detailed format checking
-│   └── p_global_format.c  Final verification step
+│   └── p_validate_format.c  Final verification step
 ├── libft/            Helper functions library
 ├── maps/             Example configuration files
 ├── Makefile          Instructions for building the program
