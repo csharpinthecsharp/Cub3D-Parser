@@ -6,15 +6,15 @@
 /*   By: ltrillar <ltrillar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 01:29:18 by ltrillar          #+#    #+#             */
-/*   Updated: 2025/12/25 23:18:11 by ltrillar         ###   ########.fr       */
+/*   Updated: 2025/12/26 16:16:26 by ltrillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-int	flood_fill(char **map, int x, int y, t_parse *t)
+int	flood_fill(char **map, size_t x, size_t y, t_parse *t)
 {
-	int	width;
+	size_t	width;
 
 	if (x >= t->map.height || x < 0)
 		return (0);
